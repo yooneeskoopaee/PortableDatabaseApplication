@@ -29,8 +29,7 @@ namespace PortableDatabaseApplication
 
                 foreach (Employee employee in employees)
                 {
-                    Console.WriteLine(
-                        $"{employee.EmployeeId}: {employee.FirstName} {employee.LastName}");
+                    Console.WriteLine($"{employee.EmployeeId}: {employee.FirstName} {employee.LastName}");
                 }
             }
             catch (Exception ex)
@@ -46,12 +45,23 @@ namespace PortableDatabaseApplication
         {
             if (string.Equals(
                     providerName,
-                    "Oracle.ManagedDataAccess.Client",
+                    "Microsoft.Data.SqlClient",
                     StringComparison.OrdinalIgnoreCase))
             {
                 DbProviderFactories.RegisterFactory(
                     providerName,
                     "Microsoft.Data.SqlClient");
+
+                return;
+            }
+            else if (string.Equals(
+                    providerName,
+                    "Oracle.ManagedDataAccess.Client",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                    DbProviderFactories.RegisterFactory(
+                    providerName,
+                    "Oracle.ManagedDataAccess.Client");
 
                 return;
             }
